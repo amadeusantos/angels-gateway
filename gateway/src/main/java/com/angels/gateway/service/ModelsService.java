@@ -1,7 +1,6 @@
 package com.angels.gateway.service;
 
 import com.angels.gateway.domain.ModelParameters;
-import com.angels.gateway.domain.ModelPredict;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
