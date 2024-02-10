@@ -1,0 +1,17 @@
+# Test your FastAPI endpoints
+
+GET http://127.0.0.1:8000/parameters
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/predict
+Accept: application/json
+
+{
+"peso": 1,
+"tempo_gestacional": 1,
+"pressao_arterial": 1
+}
+
+###
