@@ -1,6 +1,5 @@
 package com.angels.gateway.domain;
 
-import com.angels.gateway.domain.enums.ParameterEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,11 +9,11 @@ import java.util.List;
 @Setter
 public class ModelParameters {
 
-    private List<ParameterEnum> parameters;
+    private List<String> parameters;
 
     public ModelParameters() {}
 
-    public ModelParameters(List<ParameterEnum> parameters) {
+    public ModelParameters(List<String> parameters) {
         this.parameters = parameters;
     }
 

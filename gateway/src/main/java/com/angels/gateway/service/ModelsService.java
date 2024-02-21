@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -19,11 +20,11 @@ public class ModelsService {
 
     private final WebClient.Builder webClient;
 
-    public ModelParameters parametersModel(String application) {
+    public List<String> parametersModel(String application) {
         Optional<ModelParameters> optionalModelParameters = webClient.build().get()
                 .uri(PROTOCOL + application + PATH_PARAMETERS).retrieve()
                 .bodyToMono(ModelParameters.class).blockOptional();
-        return optionalModelParameters.get();
+        return optionalModelParameters.get().getParameters();
     }
 
     public Map modelPredict(String application, Map<String, ?> parameters) {
