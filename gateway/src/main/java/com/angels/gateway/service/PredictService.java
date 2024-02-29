@@ -21,22 +21,25 @@ public class PredictService {
                 .map(application -> application.getName().toLowerCase())
                 .filter(name -> name.startsWith("model")).toList();
         Map<String, Map> responseModels = new HashMap<>();
-        for (String model: models) {
-            List<String> parametersModel = modelsService.parametersModel(model);
-            if (parametersModel.stream().allMatch(parameters::containsKey)) {
-                Map<String, ?> request = requestBuild(parameters, parametersModel);
-                responseModels.put(model,modelsService.modelPredict(model, request));
-            }
-        }
+        List<Boolean> check = models.parallelStream().map(model -> toCheck(responseModels, model, parameters)).toList();
         return responseModels;
     }
 
     private Map<String, ?> requestBuild(Map<String, ?> parameters, List<String> parametersModel) {
         Map<String, Object> request = new HashMap<>();
-//        for (String parameter: parametersModel) {
-//            request.putIfAbsent(parameter, parameters.get(parameter));
-//        }
+        for (String parameter: parametersModel) {
+            request.putIfAbsent(parameter, parameters.get(parameter));
+        }
         return request;
+    }
+
+    private boolean toCheck(Map<String, Map> responseModels, String model, Map<String, ?> parameters) {
+        List<String> parametersModel = modelsService.parametersModel(model);
+        if (parametersModel.stream().allMatch(parameters::containsKey)) {
+            Map<String, ?> request = requestBuild(parameters, parametersModel);
+            responseModels.put(model,modelsService.modelPredict(model, request));
+        }
+        return true;
     }
 
 }
