@@ -5,8 +5,14 @@ from parameters import ParametersDTO
 
 
 app = FastAPI()
-client = EurekaClient(eureka_server="http://localhost:8761/eureka", app_name="model-service",
-                      instance_ip="127.0.0.1", instance_port=8000, eureka_basic_auth_user="user", eureka_basic_auth_password="password")
+
+eureka_server = "http://localhost:8761/eureka"
+app_name = "model-test-service"
+instance_host = "127.0.0.1"
+instance_port = 8000
+
+client = EurekaClient(eureka_server=eureka_server, app_name=app_name,instance_host=instance_host,
+                      instance_port=instance_port, status_page_url="/docs")
 
 
 @app.on_event("startup")
