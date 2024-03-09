@@ -2,6 +2,7 @@ package com.angels.gateway.service;
 
 import com.angels.gateway.domain.ModelParameters;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,6 +21,7 @@ public class ModelsService {
 
     private final WebClient.Builder webClient;
 
+    @Cacheable("parameters")
     public List<String> parametersModel(String application) {
         Optional<ModelParameters> optionalModelParameters = webClient.build().get()
                 .uri(PROTOCOL + application + PATH_PARAMETERS).retrieve()
