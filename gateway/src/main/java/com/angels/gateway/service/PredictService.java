@@ -48,7 +48,8 @@ public class PredictService {
     }
 
     private Map<String, Object> checkForModelsRisk(String modelResponse, Map<String, Map> responseModels) {
-        Object riskObject =  responseModels.get(modelResponse).get("risk");
+        if (!modelResponse.isEmpty()  && !responseModels.isEmpty()) {
+            Object riskObject =  responseModels.get(modelResponse).get("prediction");
         Map<String, Object> modelsAndRisk = new HashMap<>();
         
         if (riskObject instanceof Boolean) {
@@ -60,6 +61,10 @@ public class PredictService {
             throw new ModelResponseException("An error occurred when getting model's responses");
         }
         return modelsAndRisk;
+        } else {
+            
+            return new HashMap<>();
+        }        
     }
 
     private Map<String, Object> getModelsMap(List<Map<String, Object>> modelsAndRisk) {

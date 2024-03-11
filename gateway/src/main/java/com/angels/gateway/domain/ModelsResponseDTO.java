@@ -10,6 +10,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ModelsResponseDTO {
-    private final Map<String, Map> resonseModels;
+    private final Map<String, Map> responseModels;
     private final Map<String, Object> modelsRiskDTO;
 }

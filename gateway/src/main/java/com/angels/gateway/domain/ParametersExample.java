@@ -42,7 +42,7 @@ public class ParametersExample {
 
     private Integer time_between_pregnancies;
 
-    private Boolean risk;
+    private Boolean prediction;
 
     private Map<String, Float> probability;
 
