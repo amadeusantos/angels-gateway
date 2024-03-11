@@ -11,5 +11,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ModelsResponseDTO {
     private final Map<String, Map> resonseModels;
-    private final List<Map<String, Object>> modelsRiskDTO;
+    private final Map<String, Object> modelsRiskDTO;
 }

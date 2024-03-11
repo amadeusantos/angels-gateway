@@ -25,8 +25,7 @@ public class PredictService {
         Map<String, Map> responseModels = new HashMap<>();
         
         List<Map<String, Object>> modelsAndRisk = models.parallelStream().map(model -> toCheck(responseModels, model, parameters)).toList();
-        
-        return new ModelsResponseDTO(responseModels, modelsAndRisk);
+        return new ModelsResponseDTO(responseModels, getModelsMap(modelsAndRisk));
     }
 
     private Map<String, ?> requestBuild(Map<String, ?> parameters, List<String> parametersModel) {
@@ -60,7 +59,17 @@ public class PredictService {
         } else {
             throw new ModelResponseException("An error occurred when getting model's responses");
         }
-        System.out.println(modelsAndRisk);
         return modelsAndRisk;
+    }
+
+    private Map<String, Object> getModelsMap(List<Map<String, Object>> modelsAndRisk) {
+        
+        Map<String, Object> modelsMap = new HashMap<>(); 
+        for (int i = 0; i < modelsAndRisk.size(); i++) {
+            for (Map.Entry<String, Object> set: modelsAndRisk.get(i).entrySet()) {
+                modelsMap.put(set.getKey(), set.getValue());
+            }
+        }
+        return modelsMap;
     }
 }
