@@ -1,5 +1,7 @@
 package com.angels.gateway.domain;
 
+import java.util.Map;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,5 +41,9 @@ public class ParametersExample {
     private Integer fist_prenatal;
 
     private Integer time_between_pregnancies;
+
+    private Boolean risk;
+
+    private Map<String, Float> probability;
 
 }
