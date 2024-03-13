@@ -1,11 +1,13 @@
 package com.angels.gateway.service;
 
-import com.angels.gateway.domain.ModelParameters;
+import com.angels.gateway.domain.ModelRisk;
+import com.angels.gateway.utils.exception.BadGatewayException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,16 +25,19 @@ public class ModelsService {
 
     @Cacheable("parameters")
     public List<String> parametersModel(String application) {
-        Optional<ModelParameters> optionalModelParameters = webClient.build().get()
+        Optional<String[]> optionalModelParameters = webClient.build().get()
                 .uri(PROTOCOL + application + PATH_PARAMETERS).retrieve()
-                .bodyToMono(ModelParameters.class).blockOptional();
-        return optionalModelParameters.get().getParameters();
+                .bodyToMono(String[].class).blockOptional();
+        if (optionalModelParameters.isEmpty() || optionalModelParameters.get().length == 0) {
+            throw new BadGatewayException("error receiving model " + application + " parameters.");
+        }
+        return Arrays.stream(optionalModelParameters.get()).toList();
     }
 
-    public Map modelPredict(String application, Map<String, ?> parameters) {
-        Optional<Map> optionalModelParameters = webClient.build().post()
+    public ModelRisk modelPredict(String application, Map<String, ?> parameters) {
+        Optional<ModelRisk> optionalModelParameters = webClient.build().post()
                 .uri(PROTOCOL + application + PATH_PREDICT)
-                .bodyValue(parameters).retrieve().bodyToMono(Map.class).blockOptional();
+                .bodyValue(parameters).retrieve().bodyToMono(ModelRisk.class).blockOptional();
         return optionalModelParameters.get();
     }
 
