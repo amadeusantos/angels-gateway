@@ -2,11 +2,11 @@
 Para cadastrar novas APIs no servidor, é necessário atender a alguns requisitos para garantir seu funcionamento adequado.
 
 ## Rotas
-A API deve incluir duas rotas: um endpoint GET em /parameters e um endpoint POST em /predict.
+A API deve incluir duas rotas: um endpoint GET em /api/parameters e um endpoint POST em /api/predict.
 
-`/parameters`: Retorna uma lista dos parâmetros necessários para o modelo da API.
+`/api/parameters`: Retorna uma lista dos parâmetros necessários para o modelo da API.
 
-`/predict`: Recebe os parâmetros e retorna a previsão.
+`/api/predict`: Recebe os parâmetros e retorna a previsão.
 
 
 ## registro
