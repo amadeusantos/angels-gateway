@@ -52,8 +52,8 @@ public class PredictService {
 
     private int extractVersion(String modelName) {
         int lastDashIndex = modelName.lastIndexOf('-');
-        if (lastDashIndex != -1 && modelName.substring(lastDashIndex + 1).startsWith("version-")) {
-            return Integer.parseInt(modelName.substring(lastDashIndex + 9));
+        if (lastDashIndex != -1 && modelName.substring(lastDashIndex + 1).startsWith("version")) {
+            return Integer.parseInt(modelName.substring(lastDashIndex + 8));
         }
         return 1; // Default version if none specified
     }
