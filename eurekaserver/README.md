@@ -6,6 +6,7 @@
 
 `EUREKA_URI`: Endereço de conexão com o servidor Eureka. Deve consistir no endereço de acesso ao servidor, seguido da 
 porta e "/eureka" no final.
+`DEPLOY_TYPE`: Tipo de Deploy que está sendo realizado. Valor recomendados para utilização são `dev`, `test` e `prod`;
 
 ## Start
 Para executar o projeto é necessário instalar o 

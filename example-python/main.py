@@ -19,7 +19,7 @@ async def startup_event():
     await client.start()
 
 
-@app.get("/parameters")
+@app.get("/api/parameters")
 async def parameters():
     return [
         "previous_weight", "gestational_risk", "schooling", "has_hypertension", "has_diabetes",
@@ -29,7 +29,7 @@ async def parameters():
     ]
 
 
-@app.post("/predict")
+@app.post("/api/predict")
 async def predict(parametersDTO: ParametersDTO):
     return {
         "prediction": 1,
